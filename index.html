@@ -1,3 +1,4 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,6 +39,8 @@ td{padding:2px 4px;border-top:1px solid var(--ln)}
 td input{width:100%;box-sizing:border-box;border:1px solid transparent;background:transparent;color:var(--tx);font:inherit;padding:5px 4px;border-radius:6px}
 td input:hover,td input:focus{border-color:var(--ln);background:var(--bg);outline:none}
 td.st{padding:7px 8px}
+th.sh{cursor:pointer;color:var(--ac);user-select:none;white-space:nowrap}
+small.dk,small.mo{font-size:inherit}small.mo{display:none}
 #smod label{display:block;font-size:12px;color:var(--mu);margin-top:10px}#smod input{width:100%;box-sizing:border-box;font:inherit;font-size:13px;padding:8px 10px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--tx);margin-top:3px}#syb.er{color:#c4483a;border-color:#c4483a}#syb.ok{color:#1a9e4b;border-color:#1a9e4b}
 .lk .ed,.lk .add,.lk .del,.lk .acts .dl{display:none!important}
 #lkn:not(:empty){background:rgba(31,163,122,.12);border:1px solid #1fa37a;color:var(--tx);border-radius:10px;padding:8px 12px;font-size:13px;margin-bottom:12px}
@@ -82,13 +85,44 @@ td.d{width:34px;text-align:center}td.d input{width:auto}tr.dn td{background:rgba
 .cr{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--ln)}.cr b{display:block;font-size:14px}.cr span{font-size:12px;color:var(--mu)}
 .clist{max-height:240px;overflow:auto;margin-top:6px}
 .ch{font-weight:700;font-size:13px;margin:12px 0 2px}.ch.h{color:#d92d2d}.ch.dd{color:#1fa37a}
+@media (max-width:600px){
+ body{padding:10px}h1{font-size:18px;line-height:1.25}.sub{font-size:12px;margin-bottom:8px}
+ .tb{padding:6px;gap:5px}.tb button,.tb select,.tb .up{font-size:12px;padding:5px 8px}.tb .sp{display:none}
+ #lkn:not(:empty),#nt,#cb{font-size:12px}
+ .srch{margin-bottom:10px}.srch input{padding:8px 10px;font-size:14px}.cpb{padding:7px;font-size:13px}
+ .mini{gap:3px;margin-bottom:14px}.mh{font-size:10px}
+ .mc{padding:4px 3px;min-height:52px;border-radius:7px;overflow-wrap:normal;word-break:normal}
+ .mc b{font-size:13px}.mc span{font-size:9.5px;white-space:nowrap}
+ small.dk{display:none}small.mo{display:inline}
+ .ctag{font-size:8.5px;padding:1px 4px;margin-top:3px}
+ .cdn{margin-top:3px;line-height:1.1}.cdn b{font-size:9px;font-weight:600;overflow-wrap:break-word}.cdn i{display:none}
+ .grid{grid-template-columns:1fr;gap:10px}
+ .dh{padding:8px 10px}.dh b{font-size:15px}
+ .acts{gap:4px;padding:6px 6px 0}.acts button{font-size:11px;padding:4px 7px}
+ table{font-size:12.5px}th{font-size:10px;padding:6px 6px 3px}
+ td.st{padding:7px 6px}td.st:nth-child(2){white-space:nowrap;font-size:12px}
+ td.f{width:34px;text-align:center}th:nth-child(3){text-align:center}td.d{width:30px}td.x{width:22px}.del{padding:2px 3px}
+ .add{margin:6px;width:calc(100% - 12px);font-size:13px;padding:6px}
+}
+.tb{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center}.tb .r{display:flex;gap:6px;flex-wrap:nowrap;align-items:center}.tb .r1{order:9;margin-left:auto}
+.tb .up{text-align:center}
+.pvt{font-weight:700;font-size:15px;margin-bottom:8px}.cvc.ck{cursor:pointer;transition:border-color .15s}.cvc.ck:hover{border-color:var(--ac)}.cvc.on{border-color:var(--ac);box-shadow:0 0 0 2px var(--ac) inset}.cvc.bad b{color:#d92d2d}.cvc.bad .pb i{background:#d92d2d}.cvc b small{font-size:13px;color:var(--mu);font-weight:600}
+.pfl{margin-top:10px;border:1px solid var(--ln);border-radius:10px;overflow:hidden}.pfh{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:13px;padding:8px 10px;background:var(--bg)}.pfl .ct{margin-top:0}.pfl td{vertical-align:top}.pdt{font-size:11px;color:var(--mu);margin-top:2px;line-height:1.5}.pdt a{color:var(--ac);text-decoration:none;margin-right:4px;white-space:nowrap}.pdt a.dk2{color:#1a9e4b;font-weight:600}b.nd{color:#d92d2d}b.ok2{color:#1a9e4b}
+@media (max-width:600px){.tb{flex-direction:column;align-items:stretch;gap:6px}.tb .r{width:100%}.tb .r1{order:0;justify-content:flex-end;margin:0}.tb .r>*{flex:1 1 0;min-width:0}.tb .r1>*{flex:0 0 auto}.tb .r2 .ar{flex:0 0 40px}.tb .r2 select{flex:1 1 0}
+ .cvh{grid-template-columns:1fr 1fr;gap:6px}.cvc{padding:7px 8px}.cvc b{font-size:17px}.cvc span{font-size:11px}.pvt{font-size:14px}.pfl td,.pfl th{padding:5px 6px;font-size:12px}}
 @media print{body{padding:0}.srch,.bar,.add,.del,.mini,.acts,#cb,#nt{display:none}.grid{grid-template-columns:1fr 1fr}.day{break-inside:avoid}td input{border:none}}
 </style>
 </head>
 <body>
 <h1 id="h1"></h1>
-<div class="sub">Use + Add doctor to pick doctors by patch. Frequency can be edited. Sundays stay empty. Changes are saved in this browser, month by month.</div>
-<div class="bar tb"><button onclick="step(-1)" title="Previous month">◀</button><select id="ms" onchange="pick()"></select><select id="ys" onchange="pick()"></select><button onclick="step(1)" title="Next month">▶</button><span class="sp"></span><button id="syb" onclick="openSync()">☁ Sync</button><button id="cvb" onclick="covT()" title="Doctor coverage">Coverage</button><label class="up ed" title="Upload Excel or CSV (Doctor name, Patch, Visit frequency) to auto-plan this month">Upload<input type="file" accept=".xlsx,.xls,.csv" onchange="upl(this)" hidden></label><button onclick="window.print()" title="Print or save as PDF">PDF</button><button class="ed" onclick="resetM()" title="Reset this month">Reset</button><button class="ed" onclick="clearM()" title="Clear this month">Clear</button><button id="lkb" onclick="lockT()"></button></div>
+<div class="sub">Use + Add doctor to pick doctors by patch. Sundays stay empty. Changes are saved in this browser, month by month.</div>
+<div class="bar tb">
+<div class="r r1"><button id="syb" onclick="openSync()">☁ Sync</button></div>
+<div class="r r2"><button class="ar" onclick="step(-1)" title="Previous month">◀</button><select id="ms" onchange="pick()"></select><select id="ys" onchange="pick()"></select><button class="ar" onclick="step(1)" title="Next month">▶</button></div>
+<div class="r r3"><label class="up ed" title="Upload Excel or CSV (Doctor name, Patch, Visit frequency) to auto-plan this month">Upload<input type="file" accept=".xlsx,.xls,.csv" onchange="upl(this)" hidden></label><button onclick="window.print()" title="Print or save as PDF">PDF</button></div>
+<div class="r r4"><button class="ed" onclick="resetM()" title="Reset this month">Reset</button><button id="lkb" onclick="lockT()"></button><button class="ed" onclick="clearM()" title="Clear this month">Clear</button></div>
+<div class="r r5"><button id="plb" onclick="plT()" title="Planning status by visit frequency">Planned</button><button id="cvb" onclick="covT()" title="Visit coverage">Coverage</button></div>
+</div>
 <div id="lkn"></div>
 <div id="cv" class="cv" hidden></div>
 <div id="nt"></div><div id="cb"></div>
@@ -192,14 +226,14 @@ function render(){
  DN.slice(1).concat(DN[0]).forEach(function(x){m+='<div class="mh">'+x.slice(0,3)+'</div>'});
  for(i=0;i<(dw(1)+6)%7;i++)m+='<div></div>';
  for(d=1;d<=n;d++){
-  var list=rows.map(function(r,ix){return{r:r,ix:ix}}).filter(function(o){return o.r.d===d}),sun=dw(d)===0;
+  var list=rows.map(function(r,ix){return{r:r,ix:ix}}).filter(function(o){return o.r.d===d}).sort(function(a,b){return SD*a.r.n.localeCompare(b.r.n,undefined,{sensitivity:'base'})}),sun=dw(d)===0;
   var ct=dw(d)===2?'HTN':dw(d)===4?'DDC':'',cc2=camps.filter(function(c){return c.d===d});
-  m+='<div class="mc'+(sun?' sun':'')+(list.length?'':' e')+(ct==='HTN'?' mH':ct==='DDC'?' mD':'')+'"><a href="#d'+d+'"><b>'+d+'</b></a><span>'+(list.length?list.length+' doctors':(sun?'Sunday':'Free'))+'</span>'+(ct?'<div class="ctag '+(ct==='HTN'?'h':'dd')+'">'+ct+' camp</div>'+cc2.map(function(c){return '<div class="cdn"><b>'+esc(c.n)+'</b><i>'+esc(c.p||'-')+'</i></div>'}).join(''):'')+'</div>';
+  m+='<div class="mc'+(sun?' sun':'')+(list.length?'':' e')+(ct==='HTN'?' mH':ct==='DDC'?' mD':'')+'"><a href="#d'+d+'"><b>'+d+'</b></a><span>'+(list.length?list.length+'<small class="dk"> doctors</small><small class="mo"> Dr</small>':(sun?'Sun<small class="dk">day</small>':'Free'))+'</span>'+(ct?'<div class="ctag '+(ct==='HTN'?'h':'dd')+'">'+ct+'<small class="dk"> camp</small></div>'+cc2.map(function(c){return '<div class="cdn"><b>'+esc(c.n)+'</b><i>'+esc(c.p||'-')+'</i></div>'}).join(''):'')+'</div>';
   g+='<div class="day'+(sun?' sun':'')+'" id="d'+d+'"><div class="dh"><b>'+lbl(d)+'</b><i>'+DN[dw(d)]+(sun?'':' · '+list.length+' visits')+'</i></div>';
   if(sun){g+='<div class="empty">Sunday – holiday, no visits planned.</div></div>';continue}
   g+='<div class="acts">'+(list.length?'<button onclick="cp('+d+')">Copy this day</button><button class="dl" onclick="clr('+d+')">Delete all</button><button class="wa" onclick="shr('+d+')">Share on WhatsApp</button>':'')+'<button class="ed" onclick="sw('+(swp===d?'null':d)+')">'+(swp===d?'Cancel swap':'Swap day')+'</button>'+(clip&&clip.k!==K(Y,M)+d?'<button class="ps ed" onclick="pa('+d+')">Paste '+clip.l+' here</button>':'')+'</div>'+(swp===d?swapPanel(d):'');
-  if(list.length){g+='<table><tr><th>Doctor name</th><th>Patch</th><th>Freq</th><th>Done</th><th></th></tr>';
-   list.forEach(function(o){var cz=camps.filter(function(c){return c.d===o.r.d&&c.n===o.r.n&&c.p===o.r.p})[0],cc=(o.r.k?'dn ':'')+(cz?(cz.t==='HTN'?'cH':'cD'):'');g+='<tr class="'+cc+'"><td class="st">'+esc(o.r.n)+'</td><td class="st"><span class="dot" style="background:'+col(o.r.p)+'"></span>'+esc(o.r.p)+'</td><td class="f"><input'+(locked?' readonly':'')+' value="'+esc(o.r.f)+'" oninput="ed('+o.ix+',\'f\',this.value)"></td><td class="d"><input type="checkbox" title="Mark visit done" '+(o.r.k?'checked':'')+' onchange="ed('+o.ix+',\'k\',this.checked)"></td><td class="x"><button class="del" title="Remove" onclick="del('+o.ix+')">✕</button></td></tr>'});
+  if(list.length){g+='<table><tr><th class="sh" onclick="srt()" title="Sort doctor names">Doctor name '+(SD>0?'▲ A–Z':'▼ Z–A')+'</th><th>Patch</th><th>Freq</th><th>Done</th><th></th></tr>';
+   list.forEach(function(o){var cz=camps.filter(function(c){return c.d===o.r.d&&c.n===o.r.n&&c.p===o.r.p})[0],cc=(o.r.k?'dn ':'')+(cz?(cz.t==='HTN'?'cH':'cD'):'');g+='<tr class="'+cc+'"><td class="st">'+esc(o.r.n)+'</td><td class="st"><span class="dot" style="background:'+col(o.r.p)+'"></span>'+esc(o.r.p)+'</td><td class="f st">'+esc(o.r.f)+'</td><td class="d"><input type="checkbox" title="Mark visit done" '+(o.r.k?'checked':'')+' onchange="ed('+o.ix+',\'k\',this.checked)"></td><td class="x"><button class="del" title="Remove" onclick="del('+o.ix+')">✕</button></td></tr>'});
    g+='</table>'}else g+='<div class="empty">No visits planned.</div>';
   g+='<button class="add" onclick="add('+d+')">+ Add doctor</button></div>';
  }
@@ -250,14 +284,29 @@ function campUI(d,c){var o='<option value="">Doctor</option>',ks={},a=[];
  a.sort(function(x,y){return x.l.localeCompare(y.l)});
  a.forEach(function(x){o+='<option value="'+esc(x.k)+'"'+(c.k===x.k?' selected':'')+'>'+esc(x.l)+'</option>'});
  return '<div class="cm"><em class="'+(c.t==='HTN'?'h':c.t==='DDC'?'dd':'')+'">CAMP</em><select onchange="cs('+d+',\'t\',this.value)"><option value="">Type</option><option'+(c.t==='HTN'?' selected':'')+'>HTN</option><option'+(c.t==='DDC'?' selected':'')+'>DDC</option></select><select onchange="cs('+d+',\'k\',this.value)">'+o+'</select></div>'}
-var showCov=false;function covT(){showCov=!showCov;render()}
-function cov(){var el=document.getElementById('cv');document.getElementById('cvb').className=showCov?'p':'';el.hidden=!showCov;if(!showCov)return;
- var g={};rows.forEach(function(r){var k=r.n.toLowerCase()+'|'+r.p.toLowerCase(),x=g[k]=g[k]||{p:r.p||'-',f:1,n:0},f=parseInt(r.f,10);if(f>x.f)x.f=f;if(r.k)x.n++});
- var ks=Object.keys(g),T=ks.length,one=0,full=0,bp={},bf={};
- ks.forEach(function(k){var x=g[k],o=x.n>=1?1:0,u=x.n>=x.f?1:0;one+=o;full+=u;[[bp,x.p],[bf,x.f]].forEach(function(z){var b=z[0][z[1]]=z[0][z[1]]||{t:0,o:0,u:0};b.t++;b.o+=o;b.u+=u})});
+var pv='',pf='';
+function covT(){pv=pv==='cv'?'':'cv';pf='';render()}
+function plT(){pv=pv==='pl'?'':'pl';pf='';render()}
+function pfl(k){pf=pf===k?'':k;render();var e=document.getElementById('pfl');if(e)e.scrollIntoView({block:'nearest'})}
+function dst(all){var g={};function key(n,p){return n.toLowerCase()+'|'+p.toLowerCase()}
+ if(all)pool().forEach(function(x){g[key(x.n,x.p)]={n:x.n,p:x.p,f:parseInt(x.f,10)||1,rf:0,ds:[],dn:0}});
+ rows.forEach(function(r){var k=key(r.n,r.p),x=g[k]||(g[k]={n:r.n,p:r.p,f:1,rf:0,ds:[],dn:0}),f=parseInt(r.f,10)||1;if(f>x.rf)x.rf=f;x.ds.push(r.d);if(r.k)x.dn++});
+ return Object.keys(g).map(function(k){var x=g[k];if(x.rf)x.f=x.rf;x.ds.sort(function(a,b){return a-b});return x}).sort(function(a,b){return a.n.localeCompare(b.n,undefined,{sensitivity:'base'})})}
+function cov(){var el=document.getElementById('cv');document.getElementById('cvb').className=pv==='cv'?'p':'';document.getElementById('plb').className=pv==='pl'?'p':'';el.hidden=!pv;if(!pv)return;
+ var PL=pv==='pl',L=dst(PL),T=L.length,G,O;
+ if(!T){el.innerHTML='<div class="empty">No doctors in this month.</div>';return}
+ if(PL){G={all:['All doctors',L],p1:['Planned at least once',L.filter(function(x){return x.ds.length>=1})],n1:['Not planned yet',L.filter(function(x){return !x.ds.length})],pf:['Planned as per frequency',L.filter(function(x){return x.ds.length>=x.f})],nf:['Pending more visits to plan',L.filter(function(x){return x.ds.length>0&&x.ds.length<x.f})]}}
+ else{G={all:['Doctors in plan',L],v1:['Visited at least once',L.filter(function(x){return x.dn>=1})],n1:['Not visited yet',L.filter(function(x){return !x.dn})],vf:['Visit frequency completed',L.filter(function(x){return x.dn>=x.f})],nf:['Frequency pending',L.filter(function(x){return x.dn>0&&x.dn<x.f})]}}
+ O=Object.keys(G);
  function pb(a,b){return '<div class="pb"><i style="width:'+(b?Math.round(a*100/b):0)+'%"></i></div>'}
- function tb(m,lab,num){var s='<table class="ct"><tr><th>'+lab+'</th><th>Doctors</th><th>Visited once</th><th>Frequency completed</th></tr>';Object.keys(m).sort(function(p,q){return num?p-q:p.localeCompare(q)}).forEach(function(k){var b=m[k];s+='<tr><td>'+esc(num?k+' per month':k)+'</td><td>'+b.t+'</td><td>'+b.o+' / '+b.t+'</td><td>'+b.u+' / '+b.t+'</td></tr>'});return s+'</table>'}
- el.innerHTML=T?'<div class="cvh"><div class="cvc"><span>Total doctors</span><b>'+T+'</b></div><div class="cvc"><span>Visited at least once</span><b>'+one+' / '+T+'</b>'+pb(one,T)+'</div><div class="cvc"><span>Visit frequency completed</span><b>'+full+' / '+T+'</b>'+pb(full,T)+'</div></div><div class="cvn">Tick Done on each visit when it is completed. A doctor with frequency 2 counts as completed after 2 visits are ticked.</div>'+tb(bf,'Visit frequency',1)+tb(bp,'Patch',0):'<div class="empty">No doctors in this month.</div>'}
+ var h='<div class="pvt">'+(PL?'Planning status · '+MN[M]+' '+Y:'Visit coverage · '+MN[M]+' '+Y)+'</div><div class="cvh">'+O.map(function(k){var c=G[k][1].length,bad=k==='n1'||k==='nf';return '<div class="cvc ck'+(pf===k?' on':'')+(bad&&c?' bad':'')+'" onclick="pfl(\''+k+'\')"><span>'+G[k][0]+'</span><b>'+c+(k==='all'?'':' <small>/ '+T+'</small>')+'</b>'+(k==='all'?'':pb(c,T))+'</div>'}).join('')+'</div>';
+ h+='<div class="cvn">'+(PL?'Tap a number to see the doctors. A doctor with frequency 2 counts as planned as per frequency once planned on 2 days.':'Tap a number to see the doctors. Tick Done on each visit. A doctor with frequency 2 is completed after 2 visits are ticked.')+'</div>';
+ if(pf&&G[pf]){var l=G[pf][1];h+='<div id="pfl" class="pfl"><div class="pfh">'+G[pf][0]+' ('+l.length+')<button class="del" onclick="pfl(\''+pf+'\')">✕</button></div>';
+  if(!l.length)h+='<div class="empty">No doctors here.</div>';
+  else{h+='<table class="ct"><tr><th>Doctor</th><th>Patch</th><th>Freq</th><th>'+(PL?'Planned':'Visited')+'</th></tr>';
+   l.forEach(function(x){var c=PL?x.ds.length:x.dn,need=x.f-c;h+='<tr><td><b>'+esc(x.n)+'</b>'+(x.ds.length?'<div class="pdt">'+x.ds.map(function(d){var r=rows.filter(function(z){return z.d===d&&z.n.toLowerCase()===x.n.toLowerCase()&&z.p.toLowerCase()===x.p.toLowerCase()})[0];return '<a href="#d'+d+'"'+(r&&r.k?' class="dk2"':'')+'>'+pad(d)+'/'+pad(M+1)+(r&&r.k?' ✓':'')+'</a>'}).join(' ')+'</div>':'')+'</td><td>'+esc(x.p||'-')+'</td><td>'+x.f+'</td><td><b class="'+(need>0?'nd':'ok2')+'">'+c+' / '+x.f+'</b>'+(need>0?'<div class="pdt">'+need+' '+(PL?'to plan':'to visit')+'</div>':'')+'</td></tr>'});
+   h+='</table>'}h+='</div>'}
+ el.innerHTML=h}
 function srch(){var q=document.getElementById('q').value.trim().toLowerCase(),o=document.getElementById('sr');if(!q){o.innerHTML='';return}
  var g={};rows.forEach(function(r){if((r.n+' '+r.p).toLowerCase().indexOf(q)<0)return;var k=r.n.toLowerCase()+'|'+r.p.toLowerCase();(g[k]=g[k]||{n:r.n,p:r.p,f:r.f,v:[]}).v.push(r)});
  var ks=Object.keys(g);
@@ -286,12 +335,14 @@ function asa(){var free=adoc(document.getElementById('ap').value).filter(functio
 function aok(){var ks=Object.keys(sel);ks.forEach(function(k){var x=sel[k];rows.push({d:ad,n:x.n,p:x.p,f:x.f||"2",c:""})});sel={};document.getElementById('amod').hidden=true;if(ks.length){save();render();var e=document.getElementById('d'+ad);if(e)e.scrollIntoView({block:'center'})}}
 function closeAdd(){sel={};document.getElementById('amod').hidden=true}
 function cp(d){clip={k:K(Y,M)+d,l:pad(d)+"/"+pad(M+1)+"/"+Y,rows:rows.filter(function(r){return r.d===d}).map(function(r){return{n:r.n,p:r.p,f:r.f,c:r.c||""}})};render()}
-function pa(d){if(!clip)return;clip.rows.forEach(function(r){rows.push({d:d,n:r.n,p:r.p,f:r.f,c:r.c})});save();render();var e=document.getElementById('d'+d);if(e)e.scrollIntoView({block:'center'})}
+var SD=1;try{if(localStorage.getItem("visitcal-sort")==="-1")SD=-1}catch(e){}
+function srt(){SD=-SD;try{localStorage.setItem("visitcal-sort",String(SD))}catch(e){}render()}
+function pa(d){if(!clip)return;clip.rows.forEach(function(r){rows.push({d:d,n:r.n,p:r.p,f:r.f,c:r.c})});clip=null;save();render();var e=document.getElementById('d'+d);if(e)e.scrollIntoView({block:'center'})}
 function clr(d){var n=rows.filter(function(r){return r.d===d}).length;ask('Delete all '+n+' doctors planned on '+lbl(d)+'?',function(){rows=rows.filter(function(r){return r.d!==d});save();render();var e=document.getElementById('d'+d);if(e)e.scrollIntoView({block:'center'})},'Delete')}
 function swapPanel(d){var o='';for(var x=1;x<=dim(Y,M);x++){if(x===d||dw(x)===0)continue;var l=rows.filter(function(r){return r.d===x}),c=l.length,ps=[];l.forEach(function(r){if(r.p&&ps.indexOf(r.p)<0)ps.push(r.p)});o+='<option value="'+x+'">'+lbl(x)+' · '+DN[dw(x)]+' ('+(c?c+' doctors':'empty')+')'+(ps.length?' · '+esc(ps.join(', ')):'')+'</option>'}return '<div class="swp"><span>Swap with:</span><select id="swt">'+o+'</select><button class="ps" onclick="dosw(+document.getElementById(\'swt\').value)">Swap</button></div>'}
 function sw(d){swp=d;render()}
 function dosw(d){rows.forEach(function(r){if(r.d===swp)r.d=d;else if(r.d===d)r.d=swp});swp=null;save();render();var e=document.getElementById('d'+d);if(e)e.scrollIntoView({block:'center'})}
-function shr(d){var l=rows.filter(function(r){return r.d===d});if(!l.length)return;var t='*Doctor Visit Plan*\n'+lbl(d)+' ('+DN[dw(d)]+')\n\n'+l.map(function(r,i){return (i+1)+'. '+r.n+' - '+r.p}).join('\n');var u='https://wa.me/?text='+encodeURIComponent(t);var w=window.open(u,'_blank');if(!w)location.href=u}
+function shr(d){var l=rows.filter(function(r){return r.d===d}).sort(function(a,b){return SD*a.n.localeCompare(b.n,undefined,{sensitivity:'base'})});if(!l.length)return;var t='*Doctor Visit Plan*\n'+lbl(d)+' ('+DN[dw(d)]+')\n\n'+l.map(function(r,i){return (i+1)+'. '+r.n+' - '+r.p}).join('\n');var u='https://wa.me/?text='+encodeURIComponent(t);var w=window.open(u,'_blank');if(!w)location.href=u}
 function upl(inp){var f=inp.files[0];if(!f)return;if(typeof XLSX==="undefined"){msg("The Excel reader could not load. Check your internet connection and reload the page.");return}
  var fr=new FileReader();fr.onload=function(e){try{var wb=XLSX.read(e.target.result,{type:"array"});var a=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:""});plan(a)}catch(x){msg("Could not read this file. Please upload an .xlsx or .csv file.")}inp.value=""};fr.readAsArrayBuffer(f)}
 function plan(a){
@@ -325,3 +376,5 @@ function plan(a){
 </script>
 </body>
 </html>
+
+</body></html>
