@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Doctor Visit Calendar</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--tx:#1d2433;--mu:#6b7488;--ln:#e2e6ef;--ac:#2f5bea;--hd:#2f5bea;--hdt:#fff;--sun:#fdecec}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#141821;--card:#1e2430;--tx:#e8ecf5;--mu:#9aa4b8;--ln:#323b4d;--ac:#7c9bff;--hd:#2a3a78;--hdt:#fff;--sun:#3a2428}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#141821;--card:#1e2430;--tx:#e8ecf5;--mu:#9aa4b8;--ln:#323b4d;--ac:#7c9bff;--hd:#2a3a78;--hdt:#fff;--sun:#3a2428}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:16px}
+h1{margin:0 0 4px;font-size:24px}
+.sub{color:var(--mu);font-size:14px;margin-bottom:12px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+button,select{font:inherit;cursor:pointer;border:1px solid var(--ln);background:var(--card);color:var(--tx);border-radius:8px;padding:6px 12px}
+button.p{background:var(--ac);color:#fff;border-color:var(--ac)}
+.nav select{padding:6px 8px}
+.up{display:inline-block;cursor:pointer;background:var(--ac);color:#fff;border:1px solid var(--ac);border-radius:8px;padding:6px 12px}
+#cb,#nt{font-size:13px;color:var(--ac);margin-bottom:10px}
+.mini{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin-bottom:20px}
+.mh{text-align:center;font-size:12px;color:var(--mu);font-weight:600}
+.mc{background:var(--card);border:1px solid var(--ln);border-radius:8px;padding:6px;min-height:44px;text-decoration:none;color:var(--tx);font-size:13px;display:block;overflow-wrap:anywhere;min-width:0}
+.mc b{display:block}.mc span{font-size:11px;color:var(--ac)}
+.mc.sun{background:var(--sun)}.mc.e{opacity:.55}
+.mc em{display:inline-block;font-style:normal;font-size:10px;font-weight:700;color:#fff;border-radius:4px;padding:1px 5px;margin:0 2px 0 0}
+.mc em.h{background:#d92d2d}.mc em.dd{background:#1fa37a}
+.mc .cn{font-size:10px;line-height:1.4;margin-top:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:14px}
+.day{background:var(--card);border:1px solid var(--ln);border-radius:12px;overflow:hidden}
+.day.sun{background:var(--sun)}
+.dh{background:var(--hd);color:var(--hdt);padding:10px 14px;display:flex;justify-content:space-between;align-items:baseline}
+.dh b{font-size:16px}.dh i{font-style:normal;font-size:12px;opacity:.85}
+.day.sun .dh{background:#b4414a}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mu);padding:8px 8px 4px}
+td{padding:2px 4px;border-top:1px solid var(--ln)}
+td input{width:100%;box-sizing:border-box;border:1px solid transparent;background:transparent;color:var(--tx);font:inherit;padding:5px 4px;border-radius:6px}
+td input:hover,td input:focus{border-color:var(--ln);background:var(--bg);outline:none}
+td.st{padding:7px 8px}
+#smod label{display:block;font-size:12px;color:var(--mu);margin-top:10px}#smod input{width:100%;box-sizing:border-box;font:inherit;font-size:13px;padding:8px 10px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--tx);margin-top:3px}#syb.er{color:#c4483a;border-color:#c4483a}#syb.ok{color:#1a9e4b;border-color:#1a9e4b}
+.lk .ed,.lk .add,.lk .del,.lk .acts .dl{display:none!important}
+#lkn:not(:empty){background:rgba(31,163,122,.12);border:1px solid #1fa37a;color:var(--tx);border-radius:10px;padding:8px 12px;font-size:13px;margin-bottom:12px}
+tr.cH td,tr.cH td input{color:#d92d2d;font-weight:600}tr.cH td{background:rgba(217,45,45,.1)}tr.cH td:first-child{box-shadow:inset 3px 0 #d92d2d}
+tr.cD td,tr.cD td input{color:#1fa37a;font-weight:600}tr.cD td{background:rgba(31,163,122,.12)}tr.cD td:first-child{box-shadow:inset 3px 0 #1fa37a}
+#amod button{font-size:12px;padding:4px 10px;border-radius:6px}#amod .cr{padding:6px 0}
+#amod .mt h3{font-size:16px}#amod .cr b{font-size:13px}
+.arow{display:flex;gap:6px;align-items:center}#amod .arow select{flex:0 1 170px;width:auto;margin:0;font-size:12px;padding:4px 6px;border-radius:6px}.arow button{margin-left:auto;white-space:nowrap}td.f{width:44px}td.c{width:70px}td.x{width:28px}
+td select{width:100%;font-size:12px;padding:4px 2px}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px}
+.del{border:none;background:none;color:var(--mu);padding:2px 6px}
+.add{width:calc(100% - 16px);margin:8px;border-style:dashed;color:var(--ac)}
+.empty{padding:10px 14px;color:var(--mu);font-size:13px}
+.acts{display:flex;gap:6px;padding:8px 8px 0;flex-wrap:wrap}.acts button{font-size:12px;padding:4px 10px}
+.acts .ps{background:var(--ac);color:#fff;border-color:var(--ac)}
+.acts .dl{color:#c4483a;border-color:#c4483a}.acts .wa{color:#1a9e4b;border-color:#1a9e4b}
+.swp{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px;font-size:12px}.swp select{flex:1;min-width:0;padding:4px}.swp .ps{background:var(--ac);color:#fff;border-color:var(--ac);padding:4px 12px}
+.tb{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:8px;gap:6px}.tb .sp{flex:1}.tb button,.tb select,.tb .up{font-size:13px;padding:6px 10px;border-radius:8px;line-height:1.2}
+td.d{width:34px;text-align:center}td.d input{width:auto}tr.dn td{background:rgba(31,163,122,.14)}
+.cv{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:12px;margin-bottom:14px}
+.cvh{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:8px}
+.cvc{border:1px solid var(--ln);border-radius:10px;padding:8px 10px}.cvc span{display:block;font-size:12px;color:var(--mu)}.cvc b{font-size:20px}
+.pb{height:6px;background:var(--ln);border-radius:4px;margin-top:6px;overflow:hidden}.pb i{display:block;height:100%;background:#1fa37a}
+.ct{margin-top:8px}.ct td,.ct th{padding:4px 8px}.cvn{font-size:12px;color:var(--mu)}
+.mc a{color:inherit;text-decoration:none;display:block}.mc.cmp{border-color:var(--ac)}
+.cm{margin-top:4px;display:flex;flex-direction:column;gap:3px}.cm select{width:100%;min-width:0;font-size:10px;padding:2px;border:1px solid var(--ln);border-radius:4px;background:var(--bg);color:var(--tx)}.cm em{align-self:flex-start;background:var(--mu)}
+.srch{margin-bottom:14px}.srch input{width:100%;box-sizing:border-box;font:inherit;padding:10px 12px;border:1px solid var(--ln);border-radius:10px;background:var(--card);color:var(--tx)}
+.sc{background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:10px 14px;margin-top:8px}
+.sg{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--mu);margin-top:4px}.sg u{text-decoration:none;color:var(--tx);font-weight:600}
+.sv{font-size:12px;margin-top:6px;color:var(--mu)}.sv a{color:var(--ac);margin-right:8px}
+.mini{gap:6px}.mc{border-radius:10px;padding:8px;min-height:64px;font-size:12px}
+.mc b{font-size:15px;display:inline}.mc span{display:block;font-size:11px;color:var(--mu);margin-top:1px}
+.mc.mH{border-top:3px solid #d92d2d}.mc.mD{border-top:3px solid #1fa37a}
+.ctag{display:inline-block;margin-top:6px;font-size:10px;font-weight:700;color:#fff;border-radius:999px;padding:1px 8px}.ctag.h{background:#d92d2d}.ctag.dd{background:#1fa37a}
+.cdn{margin-top:5px;font-size:11px;line-height:1.25}.cdn b{display:block;font-size:11px;font-weight:600}.cdn i{font-style:normal;color:var(--mu);font-size:10px}
+.cpb{width:100%;margin-top:8px}
+.mod{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;display:flex;justify-content:center;padding:max(env(safe-area-inset-top),16px) 12px 12px;overflow:auto}.mod[hidden]{display:none}
+.mbox{background:var(--card);border:1px solid var(--ln);border-radius:14px;width:100%;max-width:620px;padding:16px;margin:auto 0}
+.mt{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.mt h3{margin:0;font-size:18px}
+.mbox input[type=search]{width:100%;box-sizing:border-box;font:inherit;padding:9px 12px;border:1px solid var(--ln);border-radius:10px;background:var(--bg);color:var(--tx)}
+.seg{display:flex;gap:6px;margin:10px 0}.seg button{flex:1}.mbox select{width:100%;margin-bottom:8px}
+.cr{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--ln)}.cr b{display:block;font-size:14px}.cr span{font-size:12px;color:var(--mu)}
+.clist{max-height:240px;overflow:auto;margin-top:6px}
+.ch{font-weight:700;font-size:13px;margin:12px 0 2px}.ch.h{color:#d92d2d}.ch.dd{color:#1fa37a}
+@media print{body{padding:0}.srch,.bar,.add,.del,.mini,.acts,#cb,#nt{display:none}.grid{grid-template-columns:1fr 1fr}.day{break-inside:avoid}td input{border:none}}
+</style>
+</head>
+<body>
+<h1 id="h1"></h1>
+<div class="sub">Use + Add doctor to pick doctors by patch. Frequency can be edited. Sundays stay empty. Changes are saved in this browser, month by month.</div>
+<div class="bar tb"><button onclick="step(-1)" title="Previous month">◀</button><select id="ms" onchange="pick()"></select><select id="ys" onchange="pick()"></select><button onclick="step(1)" title="Next month">▶</button><span class="sp"></span><button id="syb" onclick="openSync()">☁ Sync</button><button id="cvb" onclick="covT()" title="Doctor coverage">Coverage</button><label class="up ed" title="Upload Excel or CSV (Doctor name, Patch, Visit frequency) to auto-plan this month">Upload<input type="file" accept=".xlsx,.xls,.csv" onchange="upl(this)" hidden></label><button onclick="window.print()" title="Print or save as PDF">PDF</button><button class="ed" onclick="resetM()" title="Reset this month">Reset</button><button class="ed" onclick="clearM()" title="Clear this month">Clear</button><button id="lkb" onclick="lockT()"></button></div>
+<div id="lkn"></div>
+<div id="cv" class="cv" hidden></div>
+<div id="nt"></div><div id="cb"></div>
+<div class="srch"><input id="q" type="search" placeholder="Search a doctor by name or patch..." oninput="srch()"><button class="p cpb ed" onclick="openCamp()">Select doctors for camp</button><div id="sr"></div></div>
+<div class="mini" id="mini"></div>
+<div class="grid" id="grid"></div>
+<div class="mod" id="cmod" hidden><div class="mbox"><div class="mt"><h3>Select doctors for camp</h3><button onclick="closeCamp()">Close</button></div>
+<div class="seg"><button id="cth" onclick="cmt('HTN')">HTN camp · Tuesday</button><button id="ctd" onclick="cmt('DDC')">DDC camp · Thursday</button></div>
+<select id="cdt" onchange="cm.d=+this.value"></select>
+<input id="cq" type="search" placeholder="Search doctor name..." oninput="cl()">
+<div class="clist" id="cl"></div>
+<div class="ch" style="color:var(--tx)">Selected camp doctors</div><div id="cp"></div></div></div>
+<div class="mod" id="amod" hidden><div class="mbox"><div class="mt"><h3 id="at">Add doctor</h3><div style="display:flex;gap:6px"><button class="p" id="aok" onclick="aok()">OK</button><button onclick="closeAdd()">Close</button></div></div><div class="arow"><select id="ap" onchange="adl()"></select><button id="asa" onclick="asa()" hidden>Select all</button></div><div class="cvn" id="asel" style="margin-top:6px;color:var(--ac)"></div><div class="clist" id="adl" style="max-height:55vh"></div></div></div>
+<div class="mod" id="smod" hidden><div class="mbox" style="max-width:460px"><div class="mt"><h3>Google Sheet sync</h3><button onclick="closeSync()">Close</button></div><div class="cvn">Connect once on each phone or computer. All months, camps, Done ticks and locks are then saved to your Google Sheet and shown on every device.</div><div id="sst" style="font-size:13px;margin-top:8px;font-weight:600"></div><label>Web app URL<input id="su" placeholder="https://script.google.com/macros/s/.../exec" autocomplete="off"></label><label>Secret key<input id="sk" autocomplete="off"></label><div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap"><button class="p" onclick="saveSync()">Connect</button><button onclick="pull(true)">Sync now</button><button onclick="offSync()">Disconnect</button></div></div></div>
+<div class="mod" id="qmod" hidden style="z-index:60"><div class="mbox" style="max-width:360px"><div id="qt" style="font-size:15px;margin-bottom:14px"></div><div style="display:flex;gap:8px;justify-content:flex-end"><button id="qn" onclick="qans(false)">Cancel</button><button id="qy" class="p" style="background:#c4483a;border-color:#c4483a" onclick="qans(true)">Yes</button></div></div></div>
+<datalist id="pl"></datalist>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+var RAW={
+1:[["Ludhiana","Geetipuri|Pardeep Sachdeva|Priya Bassi|Rs Bhatia|Sidharth Garg"],["Ludhiana 1","K J Singh Kakkar|Aakshi Desai Desai|Gurcharam Awasthi|Navjot Singh|N K Aggarwal|Amanpreet"]],
+2:[["Ludhiana 1","Piyush Harchand|R Calton|Harpreet Kaur|Tejinderpal Singh Grewal|Timothy|Bakshish Singh"],["Ludhiana 2","Kanwaldeep Singh Lyall|Lydia Solemon|Sandeep Sodhi|J S Grewal"]],
+3:[["Ludhiana 2","Divya Varghese|Gajinder Pal Singh|Vipul Gupta|Gursimran Singh|Kirat Singh Grewal|Gautam Aggarwal|Archan Garg|Gursheen Kaur|Harmanpreet Singh|Hardeep Singh"]],
+4:[["Ludhiana 2","Rupali Sachdeva|Mandeep Singh Saini|Manpreet Kaur Jhinger|Gurwinder Singh Virk|Rose Kamal|Bhajan Lal|Gurbhej Singh|Gurkirat Singh|Leenu Gupta|Amandeep Singh Thind"]],
+5:[["Ludhiana 2","Parveen Khanna|Pardeep Kapoor|Ram Gopal Sahi|Ashima Arora|N S Khaira|Amrinder Singh:3"],["Ludhiana Twn","Jasvindersingh Sandhu|Alok Jain|Manbir Singh Khurana|Sanjeev Mittal"]],
+7:[["Ludhiana Twn","Maneet Kaur|Parminder Singh|Nitin Sood|Kulwant Singh|Kamal Preet Kaur|Ravinder Singh Kuka|Ramnbeer Singh|Jasmine Daas|Bhushan Bansal|Ramesh Chabra"]],
+8:[["Ludhiana Twn","Nirinder Toor|As Chahal|Parambir Singh|Raghubir Sharma|Savita Jain|Ss Grewal"],["Ludhiana Twn1","R P S Batra|PS Sandhu|Pankaj Bhalla|Rajan Issac"]],
+9:[["Goraya","Durgesh Bhardwaj|Mrs Urmil|B T S Kahlon|Sarika|Yogesh Bansal|Parampal Singh|Sukhdev Mehngi|Gian Chand|Swati Nagpal"]],
+10:[["Ludhiana Twn1","Sandeep Chopra|Vikas Loomba|Rk Aggarwal|Rahul Kohli|Mary Johan|Suman Bali|Hardeep Singh Pannu|Ravikant Singla|Manav Wadhera|Pankaj Sharma"]],
+11:[["Malerkotla","Charanjit Singh|Sunit Kumar Hind|Puneet Kathuria|Ravinder Pal Singh|Satinder Singh|Abhishek Daas|Gurvinder Singh|Zeenat Mahendru|Surinderpal Singh|Maninder Singh Gill"]],
+12:[["Raikot","Ss Sandhu|Manoj Jain|Durgesh Sharm|Sanjeev Chopra|Sarabjit Singh|Chamkaur Gill|Rajan Damathia|Simerjit Sidhu"]],
+14:[["Ludhiana2","Rp Singh|Arun Thapar|Rajeshwar|Hs Gulati|Anand Kumar|Ashish Saxena|Chanchal Gera|Jr Sachdeva|Parminder Moudgil|Nitin Malhotra"]]
+};
+var P="visitcal-v2-",OLD="visitcal-dec2026-v1",VK="visitcal-view";
+var MN=["January","February","March","April","May","June","July","August","September","October","November","December"];
+var DN=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+var COL=["#2f5bea","#e0568a","#1fa37a","#e08a1e","#8a5bd6","#1593b8","#c4483a","#6b8e23"],pm={};
+var Y=2026,M=11,rows=[],note="",clip=null,swp=null,camps=[];
+function pad(n){return n<10?"0"+n:n}
+function K(y,m){return P+y+"-"+pad(m+1)}
+function dim(y,m){return new Date(y,m+1,0).getDate()}
+function dw(d){return new Date(Y,M,d).getDay()}
+function lbl(d){return pad(d)+"/"+pad(M+1)+"/"+Y}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;")}
+function col(p){if(!(p in pm))pm[p]=COL[Object.keys(pm).length%COL.length];return pm[p]}
+function orig(){var r=[];for(var d in RAW)RAW[d].forEach(function(g){g[1].split("|").forEach(function(s){var a=s.split(":");r.push({d:+d,n:a[0],p:g[0],f:a[1]||"2",c:""})})});return r}
+function rd(y,m){try{var s=localStorage.getItem(K(y,m));if(s)return JSON.parse(s);if(y===2026&&m===11){var o=localStorage.getItem(OLD);if(o)return JSON.parse(o)}}catch(e){}return(y===2026&&m===11)?orig():null}
+function save(){ls(K(Y,M),JSON.stringify(rows))}
+var SY={u:"",k:""},pend={},pt=null,ready=false,sst="",ser=0;
+try{SY=JSON.parse(localStorage.getItem("visitcal-sync"))||SY}catch(e){}
+function now(){var t=new Date();return pad(t.getHours())+":"+pad(t.getMinutes())}
+function ls(k,v){try{localStorage.setItem(k,v)}catch(e){}if(SY.u&&k.indexOf(P)===0){pend[k]=v;clearTimeout(pt);pt=setTimeout(push,800);sstat("Saving…")}}
+function sstat(t,er){sst=t;ser=er?1:0;sbtn()}
+function sbtn(){var b=document.getElementById("syb");if(!b)return;b.textContent=SY.u?"☁ "+(sst||"Sync"):"☁ Sync";b.className=SY.u?(ser?"er":"ok"):"";var s=document.getElementById("sst");if(s)s.textContent=SY.u?"Status: "+(sst||"Connected"):"Not connected. Data is saved only on this device."}
+function push(){if(!SY.u||!ready)return;var b=pend;if(!Object.keys(b).length)return;pend={};
+ fetch(SY.u,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({key:SY.k,set:b})}).then(function(r){return r.json()}).then(function(j){if(!j.ok)throw new Error(j.error||"Error");if(!Object.keys(pend).length)sstat("Synced "+now())}).catch(function(e){Object.keys(b).forEach(function(k){if(!(k in pend))pend[k]=b[k]});sstat("Offline – saved on this device",1);clearTimeout(pt);pt=setTimeout(push,30000)})}
+var pr=null;
+function pull(manual){if(!SY.u){if(manual)msg("Enter the web app URL and secret key, then press Connect.");return}sstat("Syncing…");clearTimeout(pr);
+ fetch(SY.u+(SY.u.indexOf("?")<0?"?":"&")+"key="+encodeURIComponent(SY.k)+"&t="+Date.now()).then(function(r){return r.json()}).then(function(j){if(!j.ok)throw new Error(j.error||"Error");var d=j.data||{},i,k;
+  Object.keys(d).forEach(function(k){if(k.indexOf(P)===0&&!(k in pend))try{localStorage.setItem(k,d[k])}catch(e){}});
+  try{for(i=0;i<localStorage.length;i++){k=localStorage.key(i);if(k.indexOf(P)===0&&!(k in d)&&!(k in pend))pend[k]=localStorage.getItem(k)}}catch(e){}
+  ready=true;var sv=swp;load();swp=sv;render();
+  if(Object.keys(pend).length)push();else sstat("Synced "+now());if(manual)closeSync()}).catch(function(e){var m=String(e&&e.message||e);sstat(/key/i.test(m)?"Wrong secret key":"Offline – saved on this device",1);if(manual)msg(/key/i.test(m)?"The secret key does not match the one in the Google script.":"Could not reach the Google Sheet. Check the web app URL and your internet, then try again.");if(!/key/i.test(m))pr=setTimeout(pull,30000)})}
+function openSync(){document.getElementById("su").value=SY.u;document.getElementById("sk").value=SY.k;sbtn();document.getElementById("smod").hidden=false}
+function closeSync(){document.getElementById("smod").hidden=true}
+function saveSync(){var u=document.getElementById("su").value.trim(),k=document.getElementById("sk").value.trim();if(!/^https:\/\/script\.google(usercontent)?\.com\//.test(u)){msg("Paste the web app URL from Google Apps Script. It starts with https://script.google.com/");return}if(!k){msg("Enter the secret key.");return}
+ SY={u:u,k:k};ready=false;try{localStorage.setItem("visitcal-sync",JSON.stringify(SY))}catch(e){}pull(true)}
+function offSync(){SY={u:"",k:""};ready=false;pend={};try{localStorage.removeItem("visitcal-sync")}catch(e){}sstat("");closeSync()}
+document.addEventListener("visibilitychange",function(){if(!document.hidden&&SY.u&&ready&&!Object.keys(pend).length)pull()});
+function fill(src,y,m){var g={},out=[],t=[],d;
+ src.forEach(function(r){(g[r.d]=g[r.d]||[]).push(r)});
+ var days=Object.keys(g).map(Number).sort(function(a,b){return a-b});
+ for(d=1;d<=dim(y,m);d++)if(new Date(y,m,d).getDay()!==0)t.push(d);
+ days.forEach(function(sd,i){if(i<t.length)g[sd].forEach(function(r){out.push({d:t[i],n:r.n,p:r.p,f:r.f,c:""})})});
+ return out}
+function findSrc(y,m){for(var i=0;i<12;i++){m--;if(m<0){m=11;y--}var s=rd(y,m);if(s&&s.length)return{r:s,y:y,m:m}}return null}
+function load(){note="";camps=lc();locked=gl();var s=rd(Y,M);if(s){rows=s;return}
+ var f=findSrc(Y,M);
+ if(f){rows=fill(f.r,Y,M);note="Auto-filled from "+MN[f.m]+" "+f.y+": same day-wise plan, Sundays empty, camps cleared. Plan camps below."}else rows=[];
+ try{localStorage.setItem(K(Y,M),JSON.stringify(rows))}catch(e){}}
+function go(y,m){Y=y;M=m;swp=null;try{localStorage.setItem(VK,y+"-"+m)}catch(e){}load();render()}
+function step(n){var m=M+n,y=Y;if(m<0){m=11;y--}if(m>11){m=0;y++}go(y,m)}
+function pick(){go(+document.getElementById("ys").value,+document.getElementById("ms").value)}
+var qcb=null;
+function ask(t,yes,lab){qcb=yes;document.getElementById('qt').textContent=t;var y=document.getElementById('qy');y.textContent=lab||'Yes';y.hidden=false;document.getElementById('qn').textContent='Cancel';document.getElementById('qmod').hidden=false}
+function msg(t){qcb=null;document.getElementById('qt').textContent=t;document.getElementById('qy').hidden=true;document.getElementById('qn').textContent='OK';document.getElementById('qmod').hidden=false}
+function qans(v){document.getElementById('qmod').hidden=true;var f=qcb;qcb=null;if(v&&f)f()}
+function resetM(){var f=findSrc(Y,M),d=(Y===2026&&M===11);
+ if(!d&&!f){msg("No earlier month with a plan was found.");return}
+ ask("Reset "+MN[M]+" "+Y+" to "+(d?"the original list":"the plan of "+MN[f.m]+" "+f.y)+"? Your edits for this month will be lost.",function(){
+  if(d){rows=orig();note=""}else{rows=fill(f.r,Y,M);note="Reset from "+MN[f.m]+" "+f.y+"."}camps=[];sc();save();render()},"Reset")}
+function clearM(){ask("Delete ALL doctors planned in "+MN[M]+" "+Y+"?",function(){rows=[];camps=[];sc();save();render()},"Delete")}
+function render(){
+ var g="",m="",i,d,n=dim(Y,M);
+ var ms=document.getElementById("ms"),ys=document.getElementById("ys");
+ if(!ms.options.length){MN.forEach(function(x,k){ms.add(new Option(x,k))});for(i=2024;i<=2040;i++)ys.add(new Option(i,i))}
+ ms.value=M;ys.value=Y;
+ document.getElementById("h1").textContent="Doctor Visit Calendar – "+MN[M]+" "+Y;
+ document.title="Visit Calendar "+MN[M]+" "+Y;
+ var pats={};rows.forEach(function(r){pats[r.p]=1});
+ document.getElementById("pl").innerHTML=Object.keys(pats).map(function(p){return '<option value="'+esc(p)+'">'}).join("");
+ DN.slice(1).concat(DN[0]).forEach(function(x){m+='<div class="mh">'+x.slice(0,3)+'</div>'});
+ for(i=0;i<(dw(1)+6)%7;i++)m+='<div></div>';
+ for(d=1;d<=n;d++){
+  var list=rows.map(function(r,ix){return{r:r,ix:ix}}).filter(function(o){return o.r.d===d}),sun=dw(d)===0;
+  var ct=dw(d)===2?'HTN':dw(d)===4?'DDC':'',cc2=camps.filter(function(c){return c.d===d});
+  m+='<div class="mc'+(sun?' sun':'')+(list.length?'':' e')+(ct==='HTN'?' mH':ct==='DDC'?' mD':'')+'"><a href="#d'+d+'"><b>'+d+'</b></a><span>'+(list.length?list.length+' doctors':(sun?'Sunday':'Free'))+'</span>'+(ct?'<div class="ctag '+(ct==='HTN'?'h':'dd')+'">'+ct+' camp</div>'+cc2.map(function(c){return '<div class="cdn"><b>'+esc(c.n)+'</b><i>'+esc(c.p||'-')+'</i></div>'}).join(''):'')+'</div>';
+  g+='<div class="day'+(sun?' sun':'')+'" id="d'+d+'"><div class="dh"><b>'+lbl(d)+'</b><i>'+DN[dw(d)]+(sun?'':' · '+list.length+' visits')+'</i></div>';
+  if(sun){g+='<div class="empty">Sunday – holiday, no visits planned.</div></div>';continue}
+  g+='<div class="acts">'+(list.length?'<button onclick="cp('+d+')">Copy this day</button><button class="dl" onclick="clr('+d+')">Delete all</button><button class="wa" onclick="shr('+d+')">Share on WhatsApp</button>':'')+'<button class="ed" onclick="sw('+(swp===d?'null':d)+')">'+(swp===d?'Cancel swap':'Swap day')+'</button>'+(clip&&clip.k!==K(Y,M)+d?'<button class="ps ed" onclick="pa('+d+')">Paste '+clip.l+' here</button>':'')+'</div>'+(swp===d?swapPanel(d):'');
+  if(list.length){g+='<table><tr><th>Doctor name</th><th>Patch</th><th>Freq</th><th>Done</th><th></th></tr>';
+   list.forEach(function(o){var cz=camps.filter(function(c){return c.d===o.r.d&&c.n===o.r.n&&c.p===o.r.p})[0],cc=(o.r.k?'dn ':'')+(cz?(cz.t==='HTN'?'cH':'cD'):'');g+='<tr class="'+cc+'"><td class="st">'+esc(o.r.n)+'</td><td class="st"><span class="dot" style="background:'+col(o.r.p)+'"></span>'+esc(o.r.p)+'</td><td class="f"><input'+(locked?' readonly':'')+' value="'+esc(o.r.f)+'" oninput="ed('+o.ix+',\'f\',this.value)"></td><td class="d"><input type="checkbox" title="Mark visit done" '+(o.r.k?'checked':'')+' onchange="ed('+o.ix+',\'k\',this.checked)"></td><td class="x"><button class="del" title="Remove" onclick="del('+o.ix+')">✕</button></td></tr>'});
+   g+='</table>'}else g+='<div class="empty">No visits planned.</div>';
+  g+='<button class="add" onclick="add('+d+')">+ Add doctor</button></div>';
+ }
+ document.getElementById("mini").innerHTML=m;document.getElementById("grid").innerHTML=g;
+ document.getElementById("nt").textContent=note;
+ document.getElementById("cb").textContent=swp!==null?'Swap: '+lbl(swp)+' selected. Choose the date to swap with in the highlighted card.':(clip?'Copied: '+clip.l+' ('+clip.rows.length+' doctors). Press Paste on any date, in any month.':'');
+ document.body.classList.toggle('lk',!!locked);var lb=document.getElementById('lkb');lb.textContent=locked?'🔒 Locked · Unlock':'Submit & lock';lb.className=locked?'':'p';
+ document.getElementById('lkn').textContent=locked?'🔒 '+MN[M]+' '+Y+' plan submitted and locked on '+locked+'. Doctors, camps and days cannot be changed. You can still tick Done, share and print.':'';
+ sbtn();srch();cov();
+}
+var locked="";
+function LK(){return P+"lock-"+Y+"-"+pad(M+1)}
+function gl(){try{return localStorage.getItem(LK())||""}catch(e){return""}}
+function lockT(){if(locked){ask("Unlock "+MN[M]+" "+Y+"? The plan can be edited again.",function(){locked="";ls(LK(),"");render()},"Unlock");return}
+ ask("Submit and lock the "+MN[M]+" "+Y+" plan? Doctors, camps and days can no longer be changed. You can still tick Done, share and print.",function(){var t=new Date();locked=pad(t.getDate())+"/"+pad(t.getMonth()+1)+"/"+t.getFullYear()+" "+pad(t.getHours())+":"+pad(t.getMinutes());ls(LK(),locked);swp=null;render()},"Submit & lock")}
+function CK(y,m){return P+"camps-"+y+"-"+pad(m+1)}
+function lc(){try{var s=localStorage.getItem(CK(Y,M));if(s){var a=JSON.parse(s);if(Array.isArray(a))return a}}catch(e){}return[]}
+function sc(){ls(CK(Y,M),JSON.stringify(camps))}
+var cm={t:'HTN',d:0};
+function cdays(t){var w=t==='HTN'?2:4,a=[];for(var x=1;x<=dim(Y,M);x++)if(dw(x)===w)a.push(x);return a}
+function openCamp(){document.getElementById('cmod').hidden=false;document.getElementById('cq').value='';cmt(cm.t)}
+function closeCamp(){document.getElementById('cmod').hidden=true;render()}
+function cmt(t){cm.t=t;document.getElementById('cth').className=t==='HTN'?'p':'';document.getElementById('ctd').className=t==='DDC'?'p':'';
+ var days=cdays(t),s=document.getElementById('cdt'),o='';
+ days.forEach(function(x){var c=camps.filter(function(k){return k.d===x}).length;o+='<option value="'+x+'">'+lbl(x)+' · '+DN[dw(x)]+' ('+c+' doctors)</option>'});
+ s.innerHTML=o;if(days.indexOf(cm.d)>=0)s.value=cm.d;else cm.d=days[0];cl();cpl()}
+function cl(){var q=document.getElementById('cq').value.trim().toLowerCase(),ks={},a=[];
+ rows.forEach(function(r){var k=r.n+'|'+r.p;if(!ks[k]){ks[k]=1;a.push({n:r.n,p:r.p})}});
+ a=a.filter(function(x){return !q||(x.n+' '+x.p).toLowerCase().indexOf(q)>=0}).sort(function(x,y){return x.n.localeCompare(y.n)});
+ var o=document.getElementById('cl');
+ if(!a.length){o.innerHTML='<div class="empty">'+(rows.length?'No doctor found.':'No doctors in this month yet. Upload or add doctors first.')+'</div>';return}
+ o.innerHTML=a.slice(0,40).map(function(x){var inn=camps.filter(function(c){return c.t===cm.t&&c.n===x.n&&c.p===x.p});
+  return '<div class="cr"><div><b>'+esc(x.n)+'</b><span>'+esc(x.p||'-')+(inn.length?' · '+cm.t+' on '+inn.map(function(c){return pad(c.d)+'/'+pad(M+1)}).join(', '):'')+'</span></div><button class="p" data-n="'+esc(x.n)+'" data-p="'+esc(x.p)+'" onclick="cadd(this)">Add</button></div>'}).join('')}
+function cadd(b){var d=+document.getElementById('cdt').value,n=b.dataset.n,p=b.dataset.p;cm.d=d;
+ if(!camps.some(function(c){return c.d===d&&c.n===n&&c.p===p}))camps.push({d:d,n:n,p:p,t:cm.t});
+ if(!rows.some(function(r){return r.d===d&&r.n===n&&r.p===p})){var src=rows.filter(function(r){return r.n===n&&r.p===p})[0];rows.push({d:d,n:n,p:p,f:src?src.f:"2",c:"",cm:1});save()}
+ sc();cmt(cm.t);render()}
+function crm(i){var c=camps[i];camps.splice(i,1);if(c){var j=-1;rows.forEach(function(r,k){if(r.d===c.d&&r.n===c.n&&r.p===c.p&&r.cm)j=k});if(j>=0){rows.splice(j,1);save()}}sc();cmt(cm.t);render()}
+function cpl(){var o=document.getElementById('cp'),h='',u={};camps.forEach(function(c){u[c.d]=1});
+ var ds=Object.keys(u).map(Number).sort(function(a,b){return a-b});
+ if(!ds.length){o.innerHTML='<div class="empty">No camp doctors selected yet.</div>';return}
+ ds.forEach(function(d){h+='<div class="ch '+(dw(d)===2?'h':'dd')+'">'+lbl(d)+' · '+DN[dw(d)]+' · '+(dw(d)===2?'HTN':'DDC')+' camp</div>';
+  camps.forEach(function(c,i){if(c.d===d)h+='<div class="cr"><div><b>'+esc(c.n)+'</b><span>'+esc(c.p||'-')+'</span></div><button class="del" onclick="crm('+i+')">✕</button></div>'})});
+ o.innerHTML=h}
+function campUI(d,c){var o='<option value="">Doctor</option>',ks={},a=[];
+ rows.forEach(function(r){var k=r.n+'|'+r.p;if(!ks[k]){ks[k]=1;a.push({k:k,l:r.n+' · '+(r.p||'-')})}});
+ if(c.k&&!ks[c.k])a.push({k:c.k,l:c.k.split('|')[0]+' · '+(c.k.split('|')[1]||'-')});
+ a.sort(function(x,y){return x.l.localeCompare(y.l)});
+ a.forEach(function(x){o+='<option value="'+esc(x.k)+'"'+(c.k===x.k?' selected':'')+'>'+esc(x.l)+'</option>'});
+ return '<div class="cm"><em class="'+(c.t==='HTN'?'h':c.t==='DDC'?'dd':'')+'">CAMP</em><select onchange="cs('+d+',\'t\',this.value)"><option value="">Type</option><option'+(c.t==='HTN'?' selected':'')+'>HTN</option><option'+(c.t==='DDC'?' selected':'')+'>DDC</option></select><select onchange="cs('+d+',\'k\',this.value)">'+o+'</select></div>'}
+var showCov=false;function covT(){showCov=!showCov;render()}
+function cov(){var el=document.getElementById('cv');document.getElementById('cvb').className=showCov?'p':'';el.hidden=!showCov;if(!showCov)return;
+ var g={};rows.forEach(function(r){var k=r.n.toLowerCase()+'|'+r.p.toLowerCase(),x=g[k]=g[k]||{p:r.p||'-',f:1,n:0},f=parseInt(r.f,10);if(f>x.f)x.f=f;if(r.k)x.n++});
+ var ks=Object.keys(g),T=ks.length,one=0,full=0,bp={},bf={};
+ ks.forEach(function(k){var x=g[k],o=x.n>=1?1:0,u=x.n>=x.f?1:0;one+=o;full+=u;[[bp,x.p],[bf,x.f]].forEach(function(z){var b=z[0][z[1]]=z[0][z[1]]||{t:0,o:0,u:0};b.t++;b.o+=o;b.u+=u})});
+ function pb(a,b){return '<div class="pb"><i style="width:'+(b?Math.round(a*100/b):0)+'%"></i></div>'}
+ function tb(m,lab,num){var s='<table class="ct"><tr><th>'+lab+'</th><th>Doctors</th><th>Visited once</th><th>Frequency completed</th></tr>';Object.keys(m).sort(function(p,q){return num?p-q:p.localeCompare(q)}).forEach(function(k){var b=m[k];s+='<tr><td>'+esc(num?k+' per month':k)+'</td><td>'+b.t+'</td><td>'+b.o+' / '+b.t+'</td><td>'+b.u+' / '+b.t+'</td></tr>'});return s+'</table>'}
+ el.innerHTML=T?'<div class="cvh"><div class="cvc"><span>Total doctors</span><b>'+T+'</b></div><div class="cvc"><span>Visited at least once</span><b>'+one+' / '+T+'</b>'+pb(one,T)+'</div><div class="cvc"><span>Visit frequency completed</span><b>'+full+' / '+T+'</b>'+pb(full,T)+'</div></div><div class="cvn">Tick Done on each visit when it is completed. A doctor with frequency 2 counts as completed after 2 visits are ticked.</div>'+tb(bf,'Visit frequency',1)+tb(bp,'Patch',0):'<div class="empty">No doctors in this month.</div>'}
+function srch(){var q=document.getElementById('q').value.trim().toLowerCase(),o=document.getElementById('sr');if(!q){o.innerHTML='';return}
+ var g={};rows.forEach(function(r){if((r.n+' '+r.p).toLowerCase().indexOf(q)<0)return;var k=r.n.toLowerCase()+'|'+r.p.toLowerCase();(g[k]=g[k]||{n:r.n,p:r.p,f:r.f,v:[]}).v.push(r)});
+ var ks=Object.keys(g);
+ if(!ks.length){o.innerHTML='<div class="empty">No doctor found in '+MN[M]+' '+Y+'.</div>';return}
+ o.innerHTML=ks.slice(0,30).map(function(k){var x=g[k];x.v.sort(function(a,b){return a.d-b.d});
+  var cs=camps.filter(function(c){return (c.n+'|'+c.p).toLowerCase()===k}).sort(function(a,b){return a.d-b.d});
+  return '<div class="sc"><b>'+esc(x.n)+'</b><div class="sg"><span>Patch: <u>'+esc(x.p||'-')+'</u></span><span>Visit frequency: <u>'+esc(x.f)+'</u></span><span>Camp planned: <u>'+(cs.length?cs.map(function(c){return c.t+' ('+pad(c.d)+'/'+pad(M+1)+')'}).join(', '):'None')+'</u></span></div><div class="sv">Visit dates ('+MN[M]+'): '+x.v.map(function(r){return '<a href="#d'+r.d+'">'+pad(r.d)+'/'+pad(M+1)+'</a>'}).join(' ')+'</div></div>'}).join('')}
+function ed(i,k,v){rows[i][k]=v;save();if(k==="c"||k==="k")render()}
+function del(i){rows.splice(i,1);save();render()}
+var ad=0,sel={};
+function pool(){var ks={},a=[];rows.concat(orig()).forEach(function(r){var k=r.n.toLowerCase()+'|'+r.p.toLowerCase();if(!ks[k]){ks[k]=1;a.push({n:r.n,p:r.p,f:r.f})}});return a}
+function add(d){if(locked)return;ad=d;var ps={};pool().forEach(function(x){if(x.p)ps[x.p]=1});
+ var s=document.getElementById('ap');s.innerHTML='<option value="">Select patch</option>'+Object.keys(ps).sort().map(function(p){return '<option value="'+esc(p)+'">'+esc(p)+'</option>'}).join('');
+ document.getElementById('at').textContent='Add doctor · '+lbl(d);sel={};document.getElementById('amod').hidden=false;adl()}
+function adl(){var p=document.getElementById('ap').value,o=document.getElementById('adl');
+ var c=Object.keys(sel).length,ok=document.getElementById('aok');ok.textContent=c?'OK ('+c+')':'OK';
+ document.getElementById('asel').textContent=c?c+' doctor'+(c>1?'s':'')+' selected. You can switch patch and keep selecting.':'';
+ var sa=document.getElementById('asa');
+ if(!p){sa.hidden=true;o.innerHTML='<div class="empty">Select a patch to see its doctors.</div>';return}
+ var a=adoc(p),free=a.filter(function(x){return !x.on});sa.hidden=!free.length;
+ var all=free.length&&free.every(function(x){return sel[x.k]});sa.textContent=all?'Unselect all':'Select all';
+ o.innerHTML=a.map(function(x,i){return '<div class="cr"><div><b>'+esc(x.n)+'</b></div>'+(x.on?'<button disabled>Added</button>':sel[x.k]?'<button class="p" onclick="atg('+i+')">✓ Selected</button>':'<button onclick="atg('+i+')">Add</button>')+'</div>'}).join('')}
+function adoc(p){return pool().filter(function(x){return x.p===p}).sort(function(x,y){return x.n.localeCompare(y.n)}).map(function(x){x.k=x.n.toLowerCase()+'|'+x.p.toLowerCase();x.on=rows.some(function(r){return r.d===ad&&(r.n.toLowerCase()+'|'+r.p.toLowerCase())===x.k});return x})}
+function atg(i){var x=adoc(document.getElementById('ap').value)[i];if(!x||x.on)return;if(sel[x.k])delete sel[x.k];else sel[x.k]={n:x.n,p:x.p,f:x.f};adl()}
+function asa(){var free=adoc(document.getElementById('ap').value).filter(function(x){return !x.on}),all=free.every(function(x){return sel[x.k]});free.forEach(function(x){if(all)delete sel[x.k];else sel[x.k]={n:x.n,p:x.p,f:x.f}});adl()}
+function aok(){var ks=Object.keys(sel);ks.forEach(function(k){var x=sel[k];rows.push({d:ad,n:x.n,p:x.p,f:x.f||"2",c:""})});sel={};document.getElementById('amod').hidden=true;if(ks.length){save();render();var e=document.getElementById('d'+ad);if(e)e.scrollIntoView({block:'center'})}}
+function closeAdd(){sel={};document.getElementById('amod').hidden=true}
+function cp(d){clip={k:K(Y,M)+d,l:pad(d)+"/"+pad(M+1)+"/"+Y,rows:rows.filter(function(r){return r.d===d}).map(function(r){return{n:r.n,p:r.p,f:r.f,c:r.c||""}})};render()}
+function pa(d){if(!clip)return;clip.rows.forEach(function(r){rows.push({d:d,n:r.n,p:r.p,f:r.f,c:r.c})});save();render();var e=document.getElementById('d'+d);if(e)e.scrollIntoView({block:'center'})}
+function clr(d){var n=rows.filter(function(r){return r.d===d}).length;ask('Delete all '+n+' doctors planned on '+lbl(d)+'?',function(){rows=rows.filter(function(r){return r.d!==d});save();render();var e=document.getElementById('d'+d);if(e)e.scrollIntoView({block:'center'})},'Delete')}
+function swapPanel(d){var o='';for(var x=1;x<=dim(Y,M);x++){if(x===d||dw(x)===0)continue;var l=rows.filter(function(r){return r.d===x}),c=l.length,ps=[];l.forEach(function(r){if(r.p&&ps.indexOf(r.p)<0)ps.push(r.p)});o+='<option value="'+x+'">'+lbl(x)+' · '+DN[dw(x)]+' ('+(c?c+' doctors':'empty')+')'+(ps.length?' · '+esc(ps.join(', ')):'')+'</option>'}return '<div class="swp"><span>Swap with:</span><select id="swt">'+o+'</select><button class="ps" onclick="dosw(+document.getElementById(\'swt\').value)">Swap</button></div>'}
+function sw(d){swp=d;render()}
+function dosw(d){rows.forEach(function(r){if(r.d===swp)r.d=d;else if(r.d===d)r.d=swp});swp=null;save();render();var e=document.getElementById('d'+d);if(e)e.scrollIntoView({block:'center'})}
+function shr(d){var l=rows.filter(function(r){return r.d===d});if(!l.length)return;var t='*Doctor Visit Plan*\n'+lbl(d)+' ('+DN[dw(d)]+')\n\n'+l.map(function(r,i){return (i+1)+'. '+r.n+' - '+r.p}).join('\n');var u='https://wa.me/?text='+encodeURIComponent(t);var w=window.open(u,'_blank');if(!w)location.href=u}
+function upl(inp){var f=inp.files[0];if(!f)return;if(typeof XLSX==="undefined"){msg("The Excel reader could not load. Check your internet connection and reload the page.");return}
+ var fr=new FileReader();fr.onload=function(e){try{var wb=XLSX.read(e.target.result,{type:"array"});var a=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:""});plan(a)}catch(x){msg("Could not read this file. Please upload an .xlsx or .csv file.")}inp.value=""};fr.readAsArrayBuffer(f)}
+function plan(a){
+ var h=(a[0]||[]).map(function(x){return String(x).toLowerCase()}),ci=-1,pi=-1,fi=-1;
+ h.forEach(function(x,i){if(ci<0&&/doctor|name/.test(x))ci=i;else if(pi<0&&/patch|area|town|city/.test(x))pi=i;else if(fi<0&&/freq/.test(x))fi=i});
+ var hasH=ci>=0||pi>=0||fi>=0;if(ci<0)ci=0;if(pi<0)pi=1;if(fi<0)fi=2;
+ var list=[];
+ a.slice(hasH?1:0).forEach(function(r){var n=String(r[ci]||"").trim();if(!n)return;var f=parseInt(r[fi],10);if(!(f>0))f=1;list.push({n:n,p:String(r[pi]||"").trim(),f:f})});
+ if(!list.length){msg("No doctors found. The sheet needs the columns: Doctor name, Patch, Visit frequency.");return}
+ var days=[];for(var d=1;d<=dim(Y,M);d++)if(dw(d)!==0)days.push(d);
+ var W=days.length,load={};days.forEach(function(d){load[d]=0});
+ list.forEach(function(x){x.f=Math.min(x.f,W)});
+ var tot=list.reduce(function(s,x){return s+x.f},0),cap=Math.ceil(tot/W);
+ var out=[],byF={};
+ list.forEach(function(x){(byF[x.f]=byF[x.f]||[]).push(x)});
+ Object.keys(byF).map(Number).sort(function(p,q){return q-p}).forEach(function(f){
+  var g=byF[f].sort(function(p,q){return p.p.localeCompare(q.p)||p.n.localeCompare(q.n)});
+  for(var k=0;k<f;k++){
+   var win=days.slice(Math.floor(k*W/f),Math.floor((k+1)*W/f)),ptr=0;
+   g.forEach(function(x){
+    while(ptr<win.length-1&&load[win[ptr]]>=cap)ptr++;
+    var d=win[ptr];
+    if(load[d]>=cap)d=win.reduce(function(b,y){return load[y]<load[b]?y:b},win[0]);
+    load[d]++;out.push({d:d,n:x.n,p:x.p,f:String(f),c:""})})}});
+ out.sort(function(p,q){return p.d-q.d||p.p.localeCompare(q.p)});
+ function go2(){rows=out;save();
+ note="Planned "+list.length+" doctors ("+tot+" visits) over "+W+" working days, about "+cap+" per day. Sundays empty. Each doctor's visits are spread evenly through the month by visit frequency. Plan camps below.";
+ render()}
+ if(rows.length)ask("Replace the current "+MN[M]+" plan with "+list.length+" doctors from the file?",go2,"Replace");else go2()}
+(function(){var v=null;try{v=localStorage.getItem(VK)}catch(e){}if(v){var a=v.split("-");Y=+a[0];M=+a[1]}load();render();if(SY.u)pull()})();
+</script>
+</body>
+</html>
